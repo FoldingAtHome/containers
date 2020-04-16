@@ -26,7 +26,7 @@ CUDA 9.2 is used as a base for greater compatibility - for the details, see:
 ## Folding@home Websites
 
 * Folding@home: https://foldingathome.org/
-* Folding@home Support Forum: <https://foldingforum.org/index.php>
+* Folding@home Support Forum: <https://foldingforum.org/>
 * Folding@home Containers GitHub: <https://github.com/foldingathome/containers/>
 * Folding@home Docker Hub: <https://hub.docker.com/u/foldingathome>
 
