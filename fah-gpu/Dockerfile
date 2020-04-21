@@ -4,6 +4,9 @@
 FROM nvidia/cuda:9.2-base-ubuntu18.04
 LABEL description="Official Folding@home GPU Container"
 
+RUN groupadd -g 9999 fahuser && \
+    useradd -r -d /fah -u 9999 -g fahuser fahuser 
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       ocl-icd-opencl-dev \
@@ -24,12 +27,16 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive dpkg --install --force-depends fah.deb \
     && rm -rf fah.deb \
     && apt-get purge --autoremove -y curl \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* \
+    && mkdir -p /fah \
+    && chown fahuser:fahuser /fah \
+    && chmod 750 /fah
 
 COPY README.md /
 
 WORKDIR "/fah"
-VOLUME ["/fah"]
 EXPOSE 7396 36330
+
+USER fahuser
 
 ENTRYPOINT ["/usr/bin/FAHClient", "--chdir", "/fah"]
