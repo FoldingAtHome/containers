@@ -4,6 +4,12 @@
 FROM nvidia/cuda:9.2-base-ubuntu18.04
 LABEL description="Official Folding@home GPU Container"
 
+# Add Folding user
+RUN useradd -mG folding
+
+# Run as non privileged user
+USER folding
+
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       ocl-icd-opencl-dev \
