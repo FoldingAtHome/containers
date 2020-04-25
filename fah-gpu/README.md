@@ -29,11 +29,11 @@ CUDA 9.2 is used as a base for greater compatibility - for the details, see:
 Each of these is explained in more detail below, but they are included here
 for clarity. RFC 2119 meanings.
 
-* MUST mount read-writable persistet storage to `/fah` of the running
+* MUST mount read-writable persistent storage to `/fah` of the running
   container. Running containers MUST NOT share the same mounted directory,
-  but SHOULD be reused to avoid lost Work Units.
+  but directories SHOULD be reused to avoid lost Work Units.
 * MUST create and preload a tuned `config.xml` in each persistent
-  storage directory before running the container.
+  storage directory before running the container for the first time.
 * MUST run the container as a uid:gid, specified with with `--user` or
   equivalent, so that the running container has read-write permissions to
   the persistent storage mounted in `/fah`.
