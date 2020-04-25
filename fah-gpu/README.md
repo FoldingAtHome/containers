@@ -1,13 +1,14 @@
 # fah-gpu - Folding@home GPU Container
 
-This file covers only information targeted at the `fah-gpu` container.
-Visit the README and CONTRIBUTING at 
+This file covers only information specific to the `fah-gpu` container.
+Read the README and CONTRIBUTING at
 <https://github.com/foldingathome/containers/> for design goals,
 architecture, guidelines for contributing, and other information.
 
 Familiarity with Linux and containers is assumed. Due to the prerequisites
 and setup complexity this does not make an ideal "hello-world" container -
-the standard Folding@home Linux clients work great.
+the standard Folding@home Linux clients work great and have _slightly_ less
+overhead.
 
 ## Overview
 
@@ -22,6 +23,23 @@ avoid losing or wasting work. The config.xml also contains client state.
 
 CUDA 9.2 is used as a base for greater compatibility - for the details, see:
 [CUDA Compatibility](https://docs.nvidia.com/deploy/cuda-compatibility/index.html)
+
+### Operating Containers
+
+Each of these is explained in more detail below, but they are included here
+for clarity. RFC 2119 meanings.
+
+* MUST mount read-writable persistet storage to `/fah` of the running
+  container. Running containers MUST NOT share the same mounted directory,
+  but SHOULD be reused to avoid lost Work Units.
+* MUST create and preload a tuned `config.xml` in each persistent
+  storage directory before running the container.
+* MUST run the container as a uid:gid, specified with with `--user` or
+  equivalent, so that the running container has read-write permissions to
+  the persistent storage mounted in `/fah`.
+* SHOULD NOT run containers as root.
+* SHOULD NOT expose ports to internet without firewall rules, encryption, and
+  strong passwords.
 
 ## Folding@home Websites
 
@@ -50,13 +68,16 @@ Please raise any bugs or issues with the containers on GitHub:
   your participation with company resources, and the team/user names used.
 
 These values will be used in your config.xml later.
+
 ### Technical Requirements
 
-* Updated GPU Driver - v396 or later. Update your drivers, avoid .run files.
 * Docker 19.03 or later (for single node).
+* Persistent storage for each running container.
+
+#### For NVIDIA GPUs
+* Updated NVIDIA GPU Driver - v396 or later. 440+ recommended, avoid .run files.
 * NVIDIA Container Runtime -
   <https://github.com/NVIDIA/nvidia-container-runtime>
-* Persistent storage for each running container.
 
 ## Running on a Single machine
 
