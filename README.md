@@ -15,7 +15,7 @@ utilities to exec in and be able to debug any problems.
 
 ## Deployments
 
-This repo will also container Helm templates and other deployment
+This repo will also contain Helm templates and other deployment
 scripts/tools for a variety of environments.
 
 ## Folding@home Container Design Rules
