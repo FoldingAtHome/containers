@@ -11,7 +11,7 @@ will fit the overall goals and architecture of the containers.
 
 Container issues: <https://github.com/foldingathome/containers/issues>
 
-#### Releace Cycle and Flow
+#### Release Cycle and Flow
 
 We will do our best to follow stable, tested versions of Folding@home
 software suitable for deployment.
