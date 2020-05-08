@@ -46,18 +46,18 @@ for clarity. RFC 2119 meanings.
 ### Folding@home Websites
 
 * Folding@home: https://foldingathome.org/
-* Folding@home Support Forum: <https://foldingforum.org/>
-* Folding@home Containers GitHub: <https://github.com/foldingathome/containers/>
-* Folding@home Docker Hub: <https://hub.docker.com/u/foldingathome>
+* Folding@home Support Forum: https://foldingforum.org/
+* Folding@home Containers GitHub: https://github.com/foldingathome/containers/
+* Folding@home Docker Hub: https://hub.docker.com/u/foldingathome
 
 ### Feedback and Issues
 
 Read the README and CONTRIBUTING at
-<https://github.com/foldingathome/containers/> for design goals,
+https://github.com/foldingathome/containers/ for design goals,
 architecture, guidelines for contributing, and other information.
 
 Please raise any bugs or issues with the containers on GitHub:
-<https://github.com/foldingathome/containers/issues>
+https://github.com/foldingathome/containers/issues
 
 ## Prerequisites
 
@@ -83,7 +83,7 @@ These values will be used in your config.xml later.
 #### For NVIDIA GPUs
 * Updated NVIDIA GPU Driver - v396 or later. 440+ recommended, avoid .run files.
 * NVIDIA Container Runtime -
-  <https://github.com/NVIDIA/nvidia-container-runtime>
+  https://github.com/NVIDIA/nvidia-container-runtime
 
 ## Running on Single machines
 
@@ -116,7 +116,7 @@ the client.
 ```bash
 # Run container with GPUs, name it "fah0", map user and /fah volume
 docker run --gpus all --name fah0 -d --user "$(id -u):$(id -g)" \
-  --volume $HOME/fah:/fah fah-gpu:<VERSION>
+  --volume $HOME/fah:/fah fah-gpu:VERSION
 ```
 
 ### Monitoring Logs on a Single Machine
@@ -194,10 +194,10 @@ late or lost.
 
 ```bash
 # prefered shutdown
-<command> exec <container> FAHClient --send-command finish
+command exec container-id FAHClient --send-command finish
 
 # Stop container after checkpoint, usually under 30 seconds.
-<command> exec <container> FAHClient --send-command shutdown
+command exec container-id FAHClient --send-command shutdown
 # The container can also just be killed, but that's not as nice.
 ```
 
@@ -226,7 +226,7 @@ These are the interesting ones:
 Client help on all the options is available with:
 
 ```bash
-docker run --rm fah-gpu:<VERSION> --help
+docker run --rm fah-gpu:VERSION --help
 ```
 
 #### 1-GPU, 1-CPU, 16 thread Example Config
@@ -301,7 +301,7 @@ should help someone familiar with Singularity get started on a single machine:
 ```bash
 mkdir fah && cd fah
 # Create/Copy config.xml
-singularity build fah.sif docker://<CONTAINER-PATH>/fah-gpu:<VERSION>
+singularity build fah.sif docker://CONTAINER-PATH/fah-gpu:VERSION
 singularity instance start --nv -B$(pwd):/fah fah.sif fah_instance
 singularity exec instance://fah_instance /bin/bash -c "coproc /usr/bin/FAHClient"
 tail -f log.txt
