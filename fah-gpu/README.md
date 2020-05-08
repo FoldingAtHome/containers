@@ -97,7 +97,7 @@ That starts with one machine.
 Once the [prerequisites](#prerequisites) are met, it's time to run the
 container.
 
-See [example config.xml files](#example-config.xml-files) and be sure to
+See [example config files](#example-config-files) and be sure to
 set your user/passkey/team.
 
 ```bash
@@ -209,7 +209,7 @@ gets preempted and resumed will work fine. The `max-units` configuration
 option may also be useful in combination with low priority to use idle
 capacity where preemption is not available.
 
-## Example config.xml Files
+## Example Config Files
 
 The config options used for running the client in containers are slightly
 different than the ones used in a standalone install.
