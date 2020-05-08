@@ -1,30 +1,32 @@
-# fah-gpu - Folding@home GPU Container
+# Folding@home GPU Container
 
-This file covers only information specific to the `fah-gpu` container.
-Read the README and CONTRIBUTING at
-<https://github.com/foldingathome/containers/> for design goals,
-architecture, guidelines for contributing, and other information.
+Folding@home is a distributed computing project for simulating protein
+dynamics, including the process of protein folding and the movements of
+proteins implicated in a variety of diseases. It brings together citizen
+scientists who volunteer to run simulations of protein dynamics on their
+computers. Insights from this data are helping scientists to better
+understand biology, and providing new opportunities for developing
+therapeutics.
+
+## Overview
+
+Running the Folding@home container is straightforward, however special care
+must be taken to manage and return Work Units on time.
 
 Familiarity with Linux and containers is assumed. Due to the prerequisites
 and setup complexity this does not make an ideal "hello-world" container -
 the standard Folding@home Linux clients work great and have _slightly_ less
 overhead.
 
-## Overview
-
-_The Foldin Rule: If the client gets a Work Unit, finish the Work Unit._
-
-Running the Folding@home container is straightforward, however special care
-must be taken to manage and return Work Units on time.
-
 The Folding@home container is similar to a database container needing
 persistent storage mounted into /fah and careful lifecycle management to
-avoid losing or wasting work. The config.xml also contains client state.
+avoid losing or wasting work. The config.xml also contains client state, so
+must be managed that way.
 
 CUDA 9.2 is used as a base for greater compatibility - for the details, see:
 [CUDA Compatibility](https://docs.nvidia.com/deploy/cuda-compatibility/index.html)
 
-### Operating Containers
+### Operating the Folding@home Container
 
 Each of these is explained in more detail below, but they are included here
 for clarity. RFC 2119 meanings.
@@ -41,14 +43,18 @@ for clarity. RFC 2119 meanings.
 * SHOULD NOT expose ports to internet without firewall rules, encryption, and
   strong passwords.
 
-## Folding@home Websites
+### Folding@home Websites
 
 * Folding@home: https://foldingathome.org/
 * Folding@home Support Forum: <https://foldingforum.org/>
 * Folding@home Containers GitHub: <https://github.com/foldingathome/containers/>
 * Folding@home Docker Hub: <https://hub.docker.com/u/foldingathome>
 
-## Feedback and Issues
+### Feedback and Issues
+
+Read the README and CONTRIBUTING at
+<https://github.com/foldingathome/containers/> for design goals,
+architecture, guidelines for contributing, and other information.
 
 Please raise any bugs or issues with the containers on GitHub:
 <https://github.com/foldingathome/containers/issues>
@@ -79,7 +85,7 @@ These values will be used in your config.xml later.
 * NVIDIA Container Runtime -
   <https://github.com/NVIDIA/nvidia-container-runtime>
 
-## Running on a Single machine
+## Running on Single machines
 
 Before scaling up containers on a cluster or cloud, it's important to be
 familiar with the `/fah` storage requirements, life cycle, and
@@ -105,7 +111,7 @@ vi $HOME/fah/config.xml
 Over time config.xml will also have client state, and will be rewritten by
 the client.
 
-### Start Folding on Single Machine
+### Start Folding on a Single Machine
 
 ```bash
 # Run container with GPUs, name it "fah0", map user and /fah volume
@@ -113,7 +119,7 @@ docker run --gpus all --name fah0 -d --user "$(id -u):$(id -g)" \
   --volume $HOME/fah:/fah foldingathome/fah-gpu:latest
 ```
 
-### Monitoring Logs on Single Machine
+### Monitoring Logs on a Single Machine
 
 ```bash
 # Dump output so far this run
@@ -123,7 +129,7 @@ docker logs fah0
 docker logs -f fah0
 ```
 
-### Stopping the Container on Single Machine
+### Stopping Container on a Single Machine
 
 ```bash
 # Stop container once Work Units finish (preferred), may take hours
@@ -135,7 +141,7 @@ docker exec fah0 FAHClient --send-command shutdown
 # The container can also just be killed, but that's not as nice.
 ```
 
-## Running on a Cluster
+## Running on Clusters
 
 There are a lot of container orchestrators, so the requirements are as
 simple as possible:
@@ -171,7 +177,7 @@ Other methods are valid, as long as they meet the requirements above.
 Based on the storage setup, run one container per subfolder, mounting it
 into `/fah`.
 
-### Monitoring Logs on Single Machine
+### Monitoring Logs on a Cluster
 
 Your container orchestrator should have commands equivalent to
 `docker logs ...` and `docker exec ... ` to perform the same functions.
@@ -181,7 +187,7 @@ Your container orchestrator should have commands equivalent to
 grep points .../root-dir/*/log.txt .../root-dir/*/logs/*.txt
 ```
 
-### Stopping Containers on a Cluster
+### Stopping Container on a Cluster
 
 How containers are stopped on the cluster will effect how many Work Units are
 late or lost.
@@ -281,4 +287,22 @@ docker run --rm foldingathome/fah-gpu:latest --help
   <slot id='11' type='SMP'> <cpus v='18'/> </slot>
 
 </config>
+```
+
+## Other Runtimes
+
+While this README focused on Docker, it is not the only container runtime.
+
+### Singularity
+
+A full Singularity HOWTO is beyond this document currently. These commands
+should help someone familiar with Singularity get started on a single machine:
+
+```bash
+mkdir fah && cd fah
+# Create/Copy config.xml
+singularity build fah.sif docker://nvcr.io/nvstaging/folding-at-home/fah-gpu:7.5.1
+singularity instance start --nv -B$(pwd):/fah fah.sif fah_instance
+singularity exec instance://fah_instance /bin/bash -c "coproc /usr/bin/FAHClient"
+tail -f log.txt
 ```
