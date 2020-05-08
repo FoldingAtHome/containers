@@ -1,0 +1,38 @@
+# Folding@home AMD ROCm Container
+
+FROM ubuntu:18.04
+LABEL description="Folding@home AMD ROCm Container"
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      curl \
+      libnuma-dev \
+      gnupg \
+      ca-certificates \
+    # get ROCm OpenCL runtime packages
+    && curl -sL http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | apt-key add - \
+    && printf "deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main" | tee /etc/apt/sources.list.d/rocm.list \
+    && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --install-recommends \
+      rocm-dev \
+    # next line gets past the fahclient.postinst
+    && mkdir -p /etc/fahclient && touch /etc/fahclient/config.xml \
+    # download and verify checksum
+    && curl -fsSL \
+      https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb \
+      -o fah.deb \
+    && echo "113cf292f7cc3a49ed718f0c44849e30018e799fa9f1eacd75716badbcb64cc8 fah.deb" \
+      | sha256sum -c --strict - \
+    # install and cleanup
+    && DEBIAN_FRONTEND=noninteractive dpkg --install --force-depends fah.deb \
+    && rm -rf fah.deb \
+    && apt-get purge --autoremove -y curl \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+# explicitly point FAHClient to the ROCm libOpenCL
+ENV LD_LIBRARY_PATH=/opt/rocm-3.3.0/opencl/lib/x86_64
+
+WORKDIR "/fah"
+VOLUME ["/fah"]
+EXPOSE 7396 36330
+
+ENTRYPOINT ["/usr/bin/FAHClient", "--chdir", "/fah"]
