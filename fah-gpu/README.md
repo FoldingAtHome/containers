@@ -116,7 +116,7 @@ the client.
 ```bash
 # Run container with GPUs, name it "fah0", map user and /fah volume
 docker run --gpus all --name fah0 -d --user "$(id -u):$(id -g)" \
-  --volume $HOME/fah:/fah foldingathome/fah-gpu:latest
+  --volume $HOME/fah:/fah fah-gpu:<VERSION>
 ```
 
 ### Monitoring Logs on a Single Machine
@@ -226,7 +226,7 @@ These are the interesting ones:
 Client help on all the options is available with:
 
 ```bash
-docker run --rm foldingathome/fah-gpu:latest --help
+docker run --rm fah-gpu:<VERSION> --help
 ```
 
 #### 1-GPU, 1-CPU, 16 thread Example Config
@@ -301,7 +301,7 @@ should help someone familiar with Singularity get started on a single machine:
 ```bash
 mkdir fah && cd fah
 # Create/Copy config.xml
-singularity build fah.sif docker://nvcr.io/nvstaging/folding-at-home/fah-gpu:7.5.1
+singularity build fah.sif docker://<CONTAINER-PATH>/fah-gpu:<VERSION>
 singularity instance start --nv -B$(pwd):/fah fah.sif fah_instance
 singularity exec instance://fah_instance /bin/bash -c "coproc /usr/bin/FAHClient"
 tail -f log.txt
