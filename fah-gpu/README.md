@@ -26,6 +26,10 @@ must be managed that way.
 CUDA 9.2 is used as a base for greater compatibility - for the details, see:
 [CUDA Compatibility](https://docs.nvidia.com/deploy/cuda-compatibility/index.html)
 
+This document uses Docker as the example runtime but others are also
+supported. Read the [Other Runtimes](#other-runtimes) section for Singularity
+and other runtimes.
+
 ### Operating the Folding@home Container
 
 Each of these is explained in more detail below, but they are included here
