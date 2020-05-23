@@ -16,9 +16,9 @@ RUN apt-get update \
     && mkdir -p /etc/fahclient && touch /etc/fahclient/config.xml \
     # download and verify checksum
     && curl -fsSL \
-      https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.5/fahclient_7.5.1_amd64.deb \
+      https://download.foldingathome.org/releases/public/release/fahclient/debian-stable-64bit/v7.6/fahclient_7.6.13_amd64.deb \
       -o fah.deb \
-    && echo "efe47061d328667259c1815b98bc6c37da339363fb8e9386673f6a96f4d37d26 fah.deb" \
+    && echo "113cf292f7cc3a49ed718f0c44849e30018e799fa9f1eacd75716badbcb64cc8 fah.deb" \
       | sha256sum -c --strict - \
     # install and cleanup
     && DEBIAN_FRONTEND=noninteractive dpkg --install --force-depends fah.deb \
