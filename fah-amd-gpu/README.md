@@ -1,6 +1,6 @@
 # fah-rocm - Folding@home GPU Container for AMD ROCm stack
 
-This file covers only information specific to the `fah-rocm` container.
+This file covers only information specific to the `fah-gpu-amd` container.
 Read the README and CONTRIBUTING at
 <https://github.com/foldingathome/containers/> for design goals,
 architecture, guidelines for contributing, and other information.
@@ -108,7 +108,7 @@ the client.
 docker run -it --device=/dev/kfd --device=/dev/dri \
   --security-opt seccomp=unconfined --group-add video \
   --name fah0 -d --user "$(id -u):$(id -g)" \
-  --volume $HOME/fah:/fah fah-rocm
+  --volume $HOME/fah:/fah fah-gpu-amd
 ```
 
 ### Monitoring Logs on Single Machine
@@ -218,7 +218,7 @@ These are the interesting ones:
 Client help on all the options is available with:
 
 ```bash
-docker run --rm foldingathome/fah-gpu:latest --help
+docker run --rm foldingathome/fah-gpu-amd:latest --help
 ```
 
 #### 1-GPU, 1-CPU, 16 thread Example Config
