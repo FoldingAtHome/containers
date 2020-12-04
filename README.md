@@ -11,7 +11,8 @@ utilities to exec in and be able to debug any problems.
 
 ## Containers
 
-* GPU container - [fah-gpu](fah-gpu/)
+* GPU container (NVIDIA) - [fah-gpu](fah-gpu/)
+* GPU container (AMD) - [fah-gpu-amd](fah-gpu-amd/)
 
 ## Deployments
 
