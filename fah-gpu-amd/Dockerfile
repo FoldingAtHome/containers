@@ -3,6 +3,8 @@
 FROM ubuntu:18.04
 LABEL description="Folding@home AMD ROCm Container"
 
+ARG ROCM_VER=3.10.0
+
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       curl \
@@ -13,7 +15,7 @@ RUN apt-get update \
     && curl -sL http://repo.radeon.com/rocm/rocm.gpg.key | apt-key add - \
     && printf "deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main" | tee /etc/apt/sources.list.d/rocm.list \
     && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --install-recommends \
-      rocm-dev \
+      rocm-dev${ROCM_VER} \
     # next line gets past the fahclient.postinst
     && mkdir -p /etc/fahclient && touch /etc/fahclient/config.xml \
     # download and verify checksum
@@ -29,7 +31,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # explicitly point FAHClient to the ROCm libOpenCL
-ENV LD_LIBRARY_PATH=/opt/rocm-3.9.0/opencl/lib/x86_64
+ENV LD_LIBRARY_PATH=/opt/rocm-${ROCM_VER}/lib
 
 WORKDIR "/fah"
 VOLUME ["/fah"]

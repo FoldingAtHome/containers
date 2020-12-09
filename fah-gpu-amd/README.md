@@ -34,6 +34,8 @@ for clarity. RFC 2119 meanings.
 * MUST run the container as a uid:gid, specified with with `--user` or
   equivalent, so that the running container has read-write permissions to
   the persistent storage mounted in `/fah`.
+* MUST run the container as a user who is a member of the 'video' group and,
+  if present, the 'render' group.
 * SHOULD NOT run containers as root.
 * SHOULD NOT expose ports to internet without firewall rules, encryption, and
   strong passwords.
@@ -74,6 +76,17 @@ These values will be used in your config.xml later.
 #### For AMD GPUs
 * Host should have ROCm DKMS drivers installed per the ROCm QuickStart Guide
   <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html>
+* Depending on your host OS (e.g. Ubuntu 20.04) you may need to add the 'render'
+ group id to the 'docker run' command:
+```bash
+dockuser@host$ getent group render
+render:x:1001:dockuser
+dockuser@host$ docker run -it --device=/dev/kfd --device=/dev/dri \
+    --security-opt seccomp=unconfined
+    --group-add video --group-add 1001 \
+    --name fah0 -d --user "$(id -u):$(id -g)" \
+    --volume $HOME/fah:/fah fah-gpu-amd
+```
 
 ## Running on a Single machine
 
