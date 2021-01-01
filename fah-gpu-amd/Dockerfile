@@ -3,7 +3,7 @@
 FROM ubuntu:18.04
 LABEL description="Folding@home AMD ROCm Container"
 
-ARG ROCM_VER=3.10.0
+ARG ROCM_VER=4.0.0
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
