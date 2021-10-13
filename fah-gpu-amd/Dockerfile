@@ -20,7 +20,6 @@ RUN apt-get update \
       rocm-opencl \
       rocm-smi-lib \
       rocminfo \
-      rocm-bandwidth-test \
     # next line gets past the fahclient.postinst
     && mkdir -p /etc/fahclient && touch /etc/fahclient/config.xml \
     # download and verify checksum
@@ -37,6 +36,7 @@ RUN apt-get update \
 
 # explicitly point FAHClient to the ROCm libOpenCL
 ENV LD_LIBRARY_PATH=/opt/rocm-${ROCM_VER}/lib
+ENV PATH=$PATH:/opt/rocm-${ROCM_VER}/bin:/opt/rocm-${ROCM_VER}/opencl/bin
 
 WORKDIR "/fah"
 VOLUME ["/fah"]
