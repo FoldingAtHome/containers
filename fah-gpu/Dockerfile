@@ -1,7 +1,7 @@
 # Folding@home GPU Container
 
-# CUDA 9.2 is chosen to be compatable with all drivers v396+
-FROM nvidia/cuda:9.2-base-ubuntu18.04
+# CUDA 11.2.2 is chosen to be compatable with OpenMM and drivers v460.32.03+
+FROM nvidia/cuda:11.2.2-base-ubuntu18.04
 LABEL description="Official Folding@home GPU Container"
 
 RUN apt-get update \
