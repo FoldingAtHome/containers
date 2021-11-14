@@ -48,16 +48,15 @@ for clarity. RFC 2119 meanings.
 
 ## Tags
 
-The client versioning is not yet _strict_
-[Semantic Versioning](https://semver.org/), so currently the tags used are:
+The Folding@home client versioning is mostly SemVer, but depends on OpenMM,
+CUDA, and other dependencies.
+[Calendar Versioning](https://calver.org/) (CalVer), is used
+starting with 21.11.0 following the YY.0M.MICRO format:
 
-* `MAJOR.MINOR.PATCH` - follows stable Folding@home Client version.
-* `MAJOR.MINOR.PATCH-rc...` - test builds of the containers, stable clients.
+* `YY.0M.MICRO` - follows month of release.
+* `YY.0M.MICRO-rc...` - test builds of the containers, stable clients.
 * `latest` - please never use latest in production, specify a version. Points
   at the latest released container.
-
-Once SemVer is strictly followed, the familiar `MAJOR`, `MAJOR.MINOR`, and
-`MAJOR.MINOR.PATCH` tags will be created.
 
 ## Folding@home Websites
 
