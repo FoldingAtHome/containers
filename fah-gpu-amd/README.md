@@ -82,7 +82,7 @@ These values will be used in your config.xml later.
 dockuser@host$ getent group render
 render:x:1001:dockuser
 dockuser@host$ docker run -it --device=/dev/kfd --device=/dev/dri \
-    --security-opt seccomp=unconfined
+    --security-opt seccomp=unconfined \
     --group-add video --group-add 1001 \
     --name fah0 -d --user "$(id -u):$(id -g)" \
     --volume $HOME/fah:/fah fah-gpu-amd
@@ -154,7 +154,7 @@ simple as possible:
 * The container orchestration needs to be able to allocate and manage GPUs.
 * Run one container per machine/VM - each client can manage many GPUs and
   CPU cores, and should have a config.xml tuned for the host/VM size.
-* Each running container must have it's own seperate persistent storage
+* Each running container must have it's own separate persistent storage
   directory mounted into the `/fah` directory of the container. They should
   be reused, but two containers should never be using the same directory.
 
@@ -188,7 +188,7 @@ Your container orchestrator should have commands equivalent to
 `docker logs ...` and `docker exec ... ` to perform the same functions.
 
 ```bash
-# See how many Work Untis have been returned by all clients
+# See how many Work Units have been returned by all clients
 grep points .../root-dir/*/log.txt .../root-dir/*/logs/*.txt
 ```
 
@@ -198,7 +198,7 @@ How containers are stopped on the cluster will effect how many Work Units are
 late or lost.
 
 ```bash
-# prefered shutdown
+# preferred shutdown
 <command> exec <container> FAHClient --send-command finish
 
 # Stop container after checkpoint, usually under 30 seconds.
