@@ -60,7 +60,7 @@ starting with 21.11.0 following the YY.0M.MICRO format:
 
 ## Folding@home Websites
 
-* Folding@home: https://foldingathome.org/
+* Folding@home: <https://foldingathome.org/>
 * Folding@home Support Forum: <https://foldingforum.org/>
 * Folding@home Containers GitHub: <https://github.com/foldingathome/containers/>
 * Folding@home Docker Hub: <https://hub.docker.com/u/foldingathome>

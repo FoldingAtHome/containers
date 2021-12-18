@@ -42,7 +42,7 @@ for clarity. RFC 2119 meanings.
 
 ## Folding@home Websites
 
-* Folding@home: https://foldingathome.org/
+* Folding@home: <https://foldingathome.org/>
 * Folding@home Support Forum: <https://foldingforum.org/>
 * Folding@home Containers GitHub: <https://github.com/foldingathome/containers/>
 * Folding@home Docker Hub: <https://hub.docker.com/u/foldingathome>
@@ -74,10 +74,12 @@ These values will be used in your config.xml later.
 * Persistent storage for each running container.
 
 #### For AMD GPUs
+
 * Host should have ROCm DKMS drivers installed per the ROCm QuickStart Guide
   <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html>
 * Depending on your host OS (e.g. Ubuntu 20.04) you may need to add the 'render'
- group id to the 'docker run' command:
+  group id to the 'docker run' command:
+
 ```bash
 dockuser@host$ getent group render
 render:x:1001:dockuser
@@ -185,7 +187,7 @@ into `/fah`.
 ### Monitoring Logs on Single Machine
 
 Your container orchestrator should have commands equivalent to
-`docker logs ...` and `docker exec ... ` to perform the same functions.
+`docker logs ...` and `docker exec ...` to perform the same functions.
 
 ```bash
 # See how many Work Units have been returned by all clients

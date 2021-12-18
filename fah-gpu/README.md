@@ -49,19 +49,19 @@ for clarity. RFC 2119 meanings.
 
 ### Folding@home Websites
 
-* Folding@home: https://foldingathome.org/
-* Folding@home Support Forum: https://foldingforum.org/
-* Folding@home Containers GitHub: https://github.com/foldingathome/containers/
-* Folding@home Docker Hub: https://hub.docker.com/u/foldingathome
+* Folding@home: <https://foldingathome.org/>
+* Folding@home Support Forum: <https://foldingforum.org/>
+* Folding@home Containers GitHub: <https://github.com/foldingathome/containers/>
+* Folding@home Docker Hub: <https://hub.docker.com/u/foldingathome>
 
 ### Feedback and Issues
 
 Read the README and CONTRIBUTING at
-https://github.com/foldingathome/containers/ for design goals,
+<https://github.com/foldingathome/containers/> for design goals,
 architecture, guidelines for contributing, and other information.
 
 Please raise any bugs or issues with the containers on GitHub:
-https://github.com/foldingathome/containers/issues
+<https://github.com/foldingathome/containers/issues>
 
 ## Prerequisites
 
@@ -85,10 +85,11 @@ These values will be used in your config.xml later.
 * Persistent storage for each running container.
 
 #### For NVIDIA GPUs
+
 * Updated NVIDIA GPU Driver
   v460.32.03 or later. Latest stringly recommended, avoid .run files.
 * NVIDIA Container Runtime -
-  https://github.com/NVIDIA/nvidia-container-runtime
+  <https://github.com/NVIDIA/nvidia-container-runtime>
 
 ## Running on Single machines
 
@@ -185,7 +186,7 @@ into `/fah`.
 ### Monitoring Logs on a Cluster
 
 Your container orchestrator should have commands equivalent to
-`docker logs ...` and `docker exec ... ` to perform the same functions.
+`docker logs ...` and `docker exec ...` to perform the same functions.
 
 ```bash
 # See how many Work Units have been returned by all clients
