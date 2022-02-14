@@ -3,7 +3,7 @@
 FROM ubuntu:18.04
 LABEL description="Folding@home AMD ROCm Container"
 
-ARG ROCM_VER=4.3.1
+ARG ROCM_RELEASE=5.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
@@ -13,11 +13,13 @@ RUN apt-get update \
       curl \
       gnupg \
       ca-certificates \
+      libnuma-dev \
     # get ROCm OpenCL runtime packages
-    && curl -sL http://repo.radeon.com/rocm/rocm.gpg.key | apt-key add - \
-    && printf "deb [arch=amd64] http://repo.radeon.com/rocm/apt/${ROCM_VER}/ xenial main" | tee /etc/apt/sources.list.d/rocm.list \
+    && curl -sL https://repo.radeon.com/rocm/rocm.gpg.key | apt-key add - \
+    && printf "deb [arch=amd64] https://repo.radeon.com/rocm/apt/${ROCM_RELEASE}/ ubuntu main" \
+        | tee /etc/apt/sources.list.d/rocm.list \
     && apt-get update && apt-get install -y --no-install-recommends \
-      rocm-opencl \
+      rocm-opencl-runtime \
       rocm-smi-lib \
       rocminfo \
     # next line gets past the fahclient.postinst
@@ -35,8 +37,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # explicitly point FAHClient to the ROCm libOpenCL
-ENV LD_LIBRARY_PATH=/opt/rocm-${ROCM_VER}/lib
-ENV PATH=$PATH:/opt/rocm-${ROCM_VER}/bin:/opt/rocm-${ROCM_VER}/opencl/bin
+#ENV LD_LIBRARY_PATH=/opt/rocm-${ROCM_VER}/lib
+#ENV PATH=$PATH:/opt/rocm-${ROCM_VER}/bin:/opt/rocm-${ROCM_VER}/opencl/bin
+ENV LD_LIBRARY_PATH=/opt/rocm/lib
+ENV PATH=$PATH:/opt/rocm/bin:/opt/rocm/opencl/bin
 
 WORKDIR "/fah"
 VOLUME ["/fah"]
