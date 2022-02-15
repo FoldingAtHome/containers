@@ -75,8 +75,9 @@ These values will be used in your config.xml later.
 
 #### For AMD GPUs
 
-* Host should have ROCm DKMS drivers installed per the ROCm QuickStart Guide
-  <https://rocmdocs.amd.com/en/latest/Installation_Guide/Installation-Guide.html>
+* Host should have prerequisites and at least amdgpu kernel mode drivers
+ installed per the ROCm Installation Guide
+  <https://docs.amd.com/bundle/ROCm_Installation_Guide-v5.0/page/Overview_of_ROCm_Installation_Methods.html>
 * Depending on your host OS (e.g. Ubuntu 20.04) you may need to add the 'render'
   group id to the 'docker run' command:
 
@@ -87,7 +88,7 @@ dockuser@host$ docker run -it --device=/dev/kfd --device=/dev/dri \
     --security-opt seccomp=unconfined \
     --group-add video --group-add 1001 \
     --name fah0 -d --user "$(id -u):$(id -g)" \
-    --volume $HOME/fah:/fah fah-gpu-amd
+    --volume $HOME/fah:/fah foldingathome/fah-gpu-amd:latest
 ```
 
 ## Running on a Single machine
@@ -123,7 +124,7 @@ the client.
 docker run -it --device=/dev/kfd --device=/dev/dri \
   --security-opt seccomp=unconfined --group-add video \
   --name fah0 -d --user "$(id -u):$(id -g)" \
-  --volume $HOME/fah:/fah fah-gpu-amd
+  --volume $HOME/fah:/fah foldingathome/fah-gpu-amd:latest
 ```
 
 ### Monitoring Logs on Single Machine
