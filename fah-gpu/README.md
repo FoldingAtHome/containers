@@ -122,7 +122,7 @@ the client.
 ```bash
 # Run container with GPUs, name it "fah0", map user and /fah volume
 docker run --gpus all --name fah0 -d --user "$(id -u):$(id -g)" \
-  --volume $HOME/fah:/fah fah-gpu:VERSION
+  --volume $HOME/fah:/fah foldingathome/fah-gpu:VERSION
 ```
 
 ### Monitoring Logs on a Single Machine
@@ -232,7 +232,7 @@ These are the interesting ones:
 Client help on all the options is available with:
 
 ```bash
-docker run --rm fah-gpu:VERSION --help
+docker run --rm foldingathome/fah-gpu:VERSION --help
 ```
 
 #### 1-GPU, 1-CPU, 16 thread Example Config
