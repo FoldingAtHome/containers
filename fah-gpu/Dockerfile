@@ -1,13 +1,14 @@
 # Folding@home GPU Container
 
-# CUDA 11.2.2 is chosen to be compatable with OpenMM and drivers v460.32.03+
-FROM nvidia/cuda:11.2.2-base-ubuntu18.04
+# Ubuntu 22.04 and CUDA 11.7.1 are chosen to be compatible with OpenCL 3.0.
+FROM nvidia/cuda:11.7.1-base-ubuntu22.04
 LABEL description="Official Folding@home GPU Container"
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
       ocl-icd-opencl-dev \
       clinfo \
+      libexpat1 \
       curl \
     # point at lib mapped in by container runtime
     && mkdir -p /etc/OpenCL/vendors \
