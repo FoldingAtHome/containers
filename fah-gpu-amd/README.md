@@ -31,7 +31,7 @@ for clarity. RFC 2119 meanings.
   but directories SHOULD be reused to avoid lost Work Units.
 * MUST create and preload a tuned `config.xml` in each persistent
   storage directory before running the container for the first time.
-* MUST run the container as a uid:gid, specified with with `--user` or
+* MUST run the container as a uid:gid, specified with `--user` or
   equivalent, so that the running container has read-write permissions to
   the persistent storage mounted in `/fah`.
 * MUST run the container as a user who is a member of the 'video' group and,
@@ -58,7 +58,7 @@ Please raise any bugs or issues with the containers on GitHub:
 
 * Pick your Username -
   [FAQ](https://foldingathome.org/support/faq/stats-teams-usernames/).
-* Setup your
+* Set up your
   [Passkey](https://foldingathome.org/support/faq/points/passkey/).
   This will give bonus points after completing 10 Work Units on time.
 * Join a team or create your own -
@@ -157,7 +157,7 @@ simple as possible:
 * The container orchestration needs to be able to allocate and manage GPUs.
 * Run one container per machine/VM - each client can manage many GPUs and
   CPU cores, and should have a config.xml tuned for the host/VM size.
-* Each running container must have it's own separate persistent storage
+* Each running container must have its own separate persistent storage
   directory mounted into the `/fah` directory of the container. They should
   be reused, but two containers should never be using the same directory.
 
