@@ -65,7 +65,7 @@ Please raise any bugs or issues with the containers on GitHub:
 
 ## Prerequisites
 
-### Set up User Configuration
+### Setup User Configuration
 
 * Pick your Username -
   [FAQ](https://foldingathome.org/support/faq/stats-teams-usernames/).
