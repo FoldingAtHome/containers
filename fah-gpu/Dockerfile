@@ -1,6 +1,6 @@
 # Folding@home GPU Container
 
-# CUDA 11.2.2 is chosen to be compatable with OpenMM and drivers v460.32.03+
+# CUDA 11.2.2 is chosen to be compatible with OpenMM and drivers v460.32.03+
 FROM nvidia/cuda:11.2.2-base-ubuntu18.04
 LABEL description="Official Folding@home GPU Container"
 

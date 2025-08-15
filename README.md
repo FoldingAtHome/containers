@@ -50,7 +50,7 @@ for clarity. RFC 2119 meanings.
 
 The Folding@home client versioning is mostly SemVer, but depends on OpenMM,
 CUDA, and other dependencies.
-[Calendar Versioning](https://calver.org/) (CalVer), is used
+[Calendar Versioning](https://calver.org/) (CalVer) is used
 starting with 21.11.0 following the YY.0M.MICRO format:
 
 * `YY.0M.MICRO` - follows month of release.
